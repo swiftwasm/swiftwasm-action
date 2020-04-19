@@ -11,6 +11,8 @@ as we're fixing [current issues with SwiftPM support](https://github.com/swiftwa
 
 ## Example usage
 
+```yml
 uses: swiftwasm/swiftwasm-action@master
 with:
   swift-action: test
+```
