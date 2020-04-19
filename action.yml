@@ -8,6 +8,6 @@ inputs:
     default: 'build'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker.pkg.github.com/swiftwasm/swiftwasm-action/swiftwasm-action:latest'
   args:
     - ${{ inputs.swift-action }}
