@@ -1,16 +1,16 @@
 FROM swiftwasm/swiftwasm-builder AS build
 
 RUN mkdir /home/builder/unpack && cd /home/builder/unpack && \
-  tar xzf /home/builder/source/swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz
+  tar xzf /home/builder/source/swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz --strip-components=1
 
 # Container image that runs your code
 FROM ubuntu:18.04
 
-# Set debconf to run non-interactively
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+LABEL maintainer="SwiftWasm Maintainers <hello@swiftwasm.org>"
+LABEL Description="Docker Container for the SwiftWasm toolchain and SDK"
 
-RUN apt-get update && apt-get install -y -q --no-install-recommends \
-    ca-certificates \
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && apt-get -q update && \
+    apt-get -q install -y \
     libatomic1 \
     libcurl4 \
     libxml2 \
@@ -25,25 +25,11 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
     tzdata \
     git \
     pkg-config \
-    lsb-release \
-    sudo && \
-  apt-get clean all
+    && rm -r /var/lib/apt/lists/*
 
-RUN adduser --disabled-password --shell /bin/bash --gecos '' builder
-RUN adduser builder sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-USER builder
-
-RUN git clone https://github.com/kylef/swiftenv.git ~/.swiftenv
-
-ENV PATH="/home/builder/.swiftenv/bin:${PATH}"
-
-RUN mkdir -p /home/builder/.swiftenv/versions
-COPY --from=build /home/builder/unpack/ /home/builder/.swiftenv/versions
-RUN swiftenv global $(swiftenv versions | tail -1)
-
-RUN echo 'eval "$(swiftenv init -)"' >> /home/builder/.bash_profile
+COPY --from=build /home/builder/unpack/ /
+RUN set -e; \
+    chmod -R o+r /usr/lib/swift
 
 COPY entrypoint.sh /home/builder/entrypoint.sh
 

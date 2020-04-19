@@ -2,6 +2,4 @@
 
 set -eux
 
-eval "$(swiftenv init -)"
-
 swift $*
