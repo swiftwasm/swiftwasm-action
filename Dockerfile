@@ -31,10 +31,10 @@ COPY --from=build /home/builder/unpack/ /
 RUN set -e; \
     chmod -R o+r /usr/lib/swift
 
-COPY entrypoint.sh /home/builder/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/home/builder/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Set the default command to run
 CMD ["--help"]
