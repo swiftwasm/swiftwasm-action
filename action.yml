@@ -5,7 +5,7 @@ inputs:
   swift-action:
     description: 'Swift action to run'
     required: true
-    default: 'build'
+    default: 'build --triple wasm32-unknown-wasi'
 runs:
   using: 'docker'
   image: 'docker://swiftwasm/swiftwasm-action:latest'
