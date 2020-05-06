@@ -7,12 +7,12 @@ as we're fixing [current issues with SwiftPM support](https://github.com/swiftwa
 
 ### `swift-action`
 
-**Optional** The command to run on your project. Default is `build`.
+**Optional** The command to run on your project. Default is `build --triple wasm32-unknown-wasi`.
 
 ## Example usage
 
 ```yml
 uses: swiftwasm/swiftwasm-action@master
 with:
-  swift-action: test
+  swift-action: test --triple wasm32-unknown-wasi
 ```
