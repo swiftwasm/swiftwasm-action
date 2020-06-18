@@ -1,7 +1,6 @@
 # SwiftWasm GitHub Action
 
-This action builds your project with the SwiftWasm toolchain and SDK. This is still work in progress 
-as we're fixing [current issues with SwiftPM support](https://github.com/swiftwasm/swift/issues/713).
+This action builds your project with the SwiftWasm toolchain and SDK.
 
 ## Inputs
 
@@ -14,5 +13,5 @@ as we're fixing [current issues with SwiftPM support](https://github.com/swiftwa
 ```yml
 uses: swiftwasm/swiftwasm-action@master
 with:
-  swift-action: test --triple wasm32-unknown-wasi
+  swift-action: build --triple wasm32-unknown-wasi
 ```
