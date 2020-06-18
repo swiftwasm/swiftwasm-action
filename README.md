@@ -4,14 +4,14 @@ This action builds your project with the SwiftWasm toolchain and SDK.
 
 ## Inputs
 
-### `swift-action`
+### `shell-action`
 
-**Optional** The command to run on your project. Default is `build --triple wasm32-unknown-wasi`.
+**Optional** The shell command to run on your project. Default is `swift build --triple wasm32-unknown-wasi`.
 
 ## Example usage
 
 ```yml
-name: Build and test
+name: Build with SwiftWasm
 
 on:
   push:
@@ -27,5 +27,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: swiftwasm/swiftwasm-action@master
         with:
-          swift-action: build --triple wasm32-unknown-wasi
+          shell-action: swift build --triple wasm32-unknown-wasi
 ```
