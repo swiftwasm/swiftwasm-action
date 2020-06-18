@@ -3,7 +3,7 @@ name: 'Builder for Swift projects that support WebAssembly'
 description: 'This action has SwiftWasm toolchain and SDK preinstalled for your CI needs'
 inputs:
   shell-action:
-    description: 'Swift action to run'
+    description: 'Shell action to run'
     required: false
     default: 'swift build --triple wasm32-unknown-wasi'
 runs:
