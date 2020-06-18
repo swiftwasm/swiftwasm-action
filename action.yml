@@ -2,12 +2,12 @@
 name: 'Builder for Swift projects that support WebAssembly'
 description: 'This action has SwiftWasm toolchain and SDK preinstalled for your CI needs'
 inputs:
-  swift-action:
+  shell-action:
     description: 'Swift action to run'
-    required: true
-    default: 'build --triple wasm32-unknown-wasi'
+    required: false
+    default: 'swift build --triple wasm32-unknown-wasi'
 runs:
   using: 'docker'
   image: 'docker://swiftwasm/swiftwasm-action:latest'
   args:
-    - ${{ inputs.swift-action }}
+    - ${{ inputs.shell-action }}
