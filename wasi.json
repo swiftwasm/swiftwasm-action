@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "target": "wasm32-unknown-wasi",
+  "sdk": "/usr/share/wasi-sysroot",
+  "toolchain-bin-dir": "/usr/bin/",
+  "extra-cc-flags": [],
+  "extra-swiftc-flags": [
+    "-I", "/usr/lib/swift/wasi/wasm32",
+    "-Xlinker", "-lCoreFoundation",
+    "-Xlinker", "-lBlocksRuntime",
+    "-Xlinker", "-licui18n",
+    "-Xlinker", "-luuid"
+  ],
+  "extra-cpp-flags": []
+}

@@ -1,7 +1,11 @@
-FROM swiftwasm/swiftwasm-builder AS build
+FROM ubuntu AS build
 
-RUN mkdir /home/builder/unpack && cd /home/builder/unpack && \
-  tar xzf /home/builder/source/swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz --strip-components=1
+ADD https://github.com/swiftwasm/swift/releases/download/\
+swift-wasm-DEVELOPMENT-SNAPSHOT-2020-06-12-a/\
+swift-wasm-DEVELOPMENT-SNAPSHOT-2020-06-12-a-linux.tar.gz \
+  /swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz
+RUN mkdir -p /home/builder/unpack && cd /home/builder/unpack && \
+  tar xzf /swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz --strip-components=1
 
 # Container image that runs your code
 FROM ubuntu:18.04
@@ -11,6 +15,7 @@ LABEL Description="Docker Container for the SwiftWasm toolchain and SDK"
 
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && apt-get -q update && \
     apt-get -q install -y \
+    curl \
     libatomic1 \
     libcurl4 \
     libxml2 \
@@ -25,9 +30,12 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && ap
     tzdata \
     git \
     pkg-config \
-    && rm -r /var/lib/apt/lists/*
+    && curl https://get.wasmer.io -sSfL | sh && \
+    apt-get purge -y curl && \
+    rm -r /var/lib/apt/lists/*
 
 COPY --from=build /home/builder/unpack/ /
+COPY wasi.json /wasi.json
 RUN set -e; \
     chmod -R o+r /usr/lib/swift
 
