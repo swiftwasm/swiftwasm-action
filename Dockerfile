@@ -1,11 +1,11 @@
 FROM ubuntu AS build
 
 ADD https://github.com/swiftwasm/swift/releases/download/\
-swift-wasm-DEVELOPMENT-SNAPSHOT-2020-06-12-a/\
-swift-wasm-DEVELOPMENT-SNAPSHOT-2020-06-12-a-linux.tar.gz \
-  /swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz
+swift-wasm-5.3-SNAPSHOT-2020-08-15-a/\
+swift-wasm-5.3-SNAPSHOT-2020-08-15-a-linux.tar.gz \
+  /swift-wasm-5.3-SNAPSHOT-linux.tar.gz
 RUN mkdir -p /home/builder/unpack && cd /home/builder/unpack && \
-  tar xzf /swift-wasm-DEVELOPMENT-SNAPSHOT-linux.tar.gz --strip-components=1
+  tar xzf /swift-wasm-5.3-SNAPSHOT-linux.tar.gz --strip-components=1
 
 # Container image that runs your code
 FROM ubuntu:18.04
