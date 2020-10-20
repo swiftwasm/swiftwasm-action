@@ -5,7 +5,9 @@ swift-wasm-5.3-SNAPSHOT-2020-10-15-a/\
 swift-wasm-5.3-SNAPSHOT-2020-10-15-a-ubuntu20.04-x86_64.tar.gz \
   /swift-wasm-5.3-SNAPSHOT.tar.gz
 RUN mkdir -p /home/builder/.carton/sdk && cd /home/builder/.carton/sdk && \
-  tar xzf /swift-wasm-5.3-SNAPSHOT.tar.gz
+  tar xzf /swift-wasm-5.3-SNAPSHOT.tar.gz && \
+  mv swift-wasm-5.3-SNAPSHOT-2020-10-15-a wasm-5.3-SNAPSHOT-2020-10-15-a && \
+  cd wasm-5.3-SNAPSHOT-2020-10-15-a/usr/bin && rm *-test swift-refactor sourcekit-lsp
 
 # Container image that runs your code
 FROM ubuntu:20.04
@@ -34,12 +36,12 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && ap
     tzdata \
     git \
     pkg-config \
-  && curl https://get.wasmer.io -sSfL | sh && \
+  && export WASMER_DIR=/usr/local && curl https://get.wasmer.io -sSfL | sh && \
     rm -r /var/lib/apt/lists/*
 
 COPY --from=build /home/builder/.carton /root/.carton
 
-RUN ln -s /root/.carton/sdk/swift-wasm-5.3-SNAPSHOT-2020-10-15-a/usr/bin/swift /usr/bin/swift
+RUN ln -s /root/.carton/sdk/wasm-5.3-SNAPSHOT-2020-10-15-a/usr/bin/swift /usr/bin/swift
 
 RUN git clone https://github.com/swiftwasm/carton.git && \
   cd carton && \
@@ -48,7 +50,7 @@ RUN git clone https://github.com/swiftwasm/carton.git && \
   cd TestApp && ../.build/release/carton test && cd .. && \
   mv .build/release/carton /usr/bin && \
   cd .. && \
-  rm -rf carton
+  rm -rf carton /tmp/wasmer*
 
 COPY entrypoint.sh /entrypoint.sh
 
