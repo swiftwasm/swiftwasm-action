@@ -27,5 +27,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: swiftwasm/swiftwasm-action@master
         with:
-          shell-action: swift build --triple wasm32-unknown-wasi
+          shell-action: carton test
 ```
