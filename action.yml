@@ -8,6 +8,6 @@ inputs:
     default: 'swift build --triple wasm32-unknown-wasi'
 runs:
   using: 'docker'
-  image: 'docker://swiftwasm/swiftwasm-action:latest'
+  image: 'docker://ghcr.io/swiftwasm/swiftwasm-action:5.3'
   args:
     - ${{ inputs.shell-action }}
