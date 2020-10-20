@@ -1,17 +1,17 @@
 # SwiftWasm GitHub Action
 
-This action builds your project with the SwiftWasm toolchain and SDK.
+This action builds your project with the SwiftWasm toolchain and SDK, and has [`carton`](https://carton.dev) and its WebAssembly dependencies preinstalled.
 
 ## Inputs
 
 ### `shell-action`
 
-**Optional** The shell command to run on your project. Default is `swift build --triple wasm32-unknown-wasi`.
+**Optional** The shell command to run on your project. Default is `carton test`.
 
 ## Example usage
 
 ```yml
-name: Build with SwiftWasm
+name: Build and test with SwiftWasm
 
 on:
   push:
@@ -20,12 +20,12 @@ on:
     branches: [main]
 
 jobs:
-  linux_build:
+  swiftwasm_build:
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
-      - uses: swiftwasm/swiftwasm-action@master
+      - uses: swiftwasm/swiftwasm-action@v5.3
         with:
           shell-action: carton test
 ```
