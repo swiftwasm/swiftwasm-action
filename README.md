@@ -32,7 +32,7 @@ jobs:
 
 ## Usage with GitHub Pages
 
-[GitHub Pages](https://pages.github.com/) is an easy way to host SwiftWasm apps. Follow the GitHub Pages guide, and then use an appropriate action after running `carton bundle` to publish the results:
+[GitHub Pages](https://pages.github.com/) is an easy way to host SwiftWasm apps. Follow [the GitHub Pages guide](https://guides.github.com/features/pages/), and then use an appropriate action after running `carton bundle` to publish the results:
 
 ```yml
 name: Deploy to GitHub Pages
