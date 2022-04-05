@@ -1,4 +1,4 @@
-FROM ghcr.io/swiftwasm/carton:0.13.0
+FROM ghcr.io/swiftwasm/carton:0.12.1
 
 LABEL maintainer="SwiftWasm Maintainers <hello@swiftwasm.org>"
 LABEL Description="Docker Container for the SwiftWasm toolchain and SDK"
