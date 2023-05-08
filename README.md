@@ -34,7 +34,7 @@ jobs:
 
 [GitHub Pages](https://pages.github.com/) is an easy way to host SwiftWasm apps. Follow [the GitHub Pages guide](https://guides.github.com/features/pages/), and then use an appropriate action after running `carton bundle` to publish the results:
 
-```yml
+```yaml
 name: Deploy to GitHub Pages
 
 on:
@@ -43,18 +43,25 @@ on:
 
 jobs:
   swiftwasm_deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: swiftwasm/swiftwasm-action@v5.7
+      - uses: swiftwasm/swiftwasm-action@v5.8
         with:
           shell-action: carton bundle
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Bundle
+          path: ./Bundle
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2
 ```
