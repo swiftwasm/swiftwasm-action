@@ -8,6 +8,6 @@ inputs:
     default: 'carton test'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/swiftwasm/swiftwasm-action:5.8'
+  image: 'docker://ghcr.io/swiftwasm/swiftwasm-action:5.9'
   args:
     - ${{ inputs.shell-action }}

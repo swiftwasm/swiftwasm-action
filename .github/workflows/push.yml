@@ -23,5 +23,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/swiftwasm/swiftwasm-action:5.8
+            ghcr.io/swiftwasm/swiftwasm-action:5.9
             ghcr.io/swiftwasm/swiftwasm-action:latest

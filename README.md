@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: swiftwasm/swiftwasm-action@v5.8
+      - uses: swiftwasm/swiftwasm-action@v5.9
         with:
           shell-action: carton test
 ```
@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: swiftwasm/swiftwasm-action@v5.8
+      - uses: swiftwasm/swiftwasm-action@v5.9
         with:
           shell-action: carton bundle
       - uses: actions/upload-pages-artifact@v1
