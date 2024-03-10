@@ -1,3 +1,7 @@
+> [!WARNING]
+> Deprecated: This Action is no longer necessary. Please use [swiftwasm/setup-swiftwasm](https://github.com/swiftwasm/setup-swiftwasm) and carton version 1.0.0 or later.
+
+
 # SwiftWasm GitHub Action
 
 This action builds your project with the SwiftWasm toolchain and SDK, and has [`carton`](https://carton.dev) and its WebAssembly dependencies preinstalled.
