@@ -1,5 +1,7 @@
 > [!WARNING]
 > Deprecated: This Action is no longer necessary. Please use [swiftwasm/setup-swiftwasm](https://github.com/swiftwasm/setup-swiftwasm) and carton version 1.0.0 or later.
+>
+> See https://github.com/pointfreeco/swift-custom-dump/pull/113/ as an example of migration
 
 
 # SwiftWasm GitHub Action
